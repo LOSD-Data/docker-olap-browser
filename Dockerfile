@@ -1,8 +1,8 @@
-FROM alpine
-MAINTAINER "Arkadiusz Stasiewicz <arkadiusz.stasiewicz@insight-centre.org>"
+FROM python:3
+MAINTAINER "Derilinx Ltd"
 
 # Update & Dependencies
-RUN apk add --update python py-pip git
+#RUN apk add --update python py-pip git
 
 # Clone CubeVisualizer files into the docker container
 RUN git clone https://github.com/LOSD-Data/qb-olap-browser.git -b cso /var/www/OLAP-Browser
@@ -15,5 +15,4 @@ COPY config.js /var/www/OLAP-Browser/resources/config.js
 EXPOSE  8000
 
 # Run python SimpleHTTPServer
-CMD cd /var/www/OLAP-Browser/ && \
-    python -m SimpleHTTPServer 8000
+CMD cd /var/www/OLAP-Browser/ && python -m http.server 8000
